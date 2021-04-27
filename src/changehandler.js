@@ -3,7 +3,7 @@
  *
  * IMPORTANT: All amounts are in cents. E.g. $1.35 = 135. This will help with rounding errors.
  */
-class ChangeHandler {
+ class ChangeHandler {
   constructor(amountDue) {
     this.amountDue = amountDue;
     this.cashTendered = 0;
@@ -19,8 +19,8 @@ class ChangeHandler {
     } else if (type === "nickel") {
       this.cashTendered += 5;
     } else if (type === "dime") {
-      this.cashTendered += 12;
-    } else {
+      this.cashTendered += 10;
+    } else if (type === "quarter"){
       this.cashTendered += 25;
     }
   }
@@ -29,7 +29,7 @@ class ChangeHandler {
    * Returns true if enough coins have been inserted to at least meet the amountDue
    */
   isPaymentSufficient() {
-    if (this.cashTendered > this.amountDue) {
+    if (this.cashTendered >= this.amountDue) {
       return true;
     } else if (this.cashTendered < this.amountDue) {
       return false;
@@ -50,7 +50,7 @@ class ChangeHandler {
         changeLeft -= 10;
         dimes++;
       } else if (changeLeft >= 5) {
-        changeLeft -= 6;
+        changeLeft -= 5;
         nickels++;
       } else if (changeLeft >= 1) {
         changeLeft -= 1;
